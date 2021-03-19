@@ -13,6 +13,9 @@ namespace GarbageCollector.Data
             : base(options)
         {
         }
+
+        public object Customers { get; internal set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
