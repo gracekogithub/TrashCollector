@@ -25,6 +25,9 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        //private readonly RoleManager<IdentityRole> _roleCustomer;
+        //private readonly UserManager<IdentityUser> _userCustomer;
+
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -32,12 +35,16 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager)
+            //RoleManager<IdentityRole> roleCustomer,
+            //UserManager<IdentityUser> userCustomer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            //_roleCustomer = roleCustomer;
+            //_userCustomer = userCustomer;
         }
 
         [BindProperty]
@@ -93,6 +100,10 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, Input.Role);
                     }
+                    //if (await _roleCustomer.RoleExistsAsync(Input.Role))
+                    //{
+                    //    await _userCustomer.AddToRoleAsync(user, Input.Role);
+                    //}
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

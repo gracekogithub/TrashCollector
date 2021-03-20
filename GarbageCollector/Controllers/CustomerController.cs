@@ -19,18 +19,15 @@ namespace GarbageCollector.Controllers
         {
             _context = context;
         }
-        // GET: CustomerController
-        public ActionResult Index()
-        {
-            
-            return View();
-        }
+        //[HttpGet]
+        //public ActionResult Index()
+        //{
+        //    string todaysDate = DateTime.Now.ToShortDateString();
+        //    //var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+        //    return Ok(todaysDate);
+        //}
 
-        // GET: CustomerController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        
 
         // GET: CustomerController/Create
         [HttpGet]
@@ -61,45 +58,6 @@ namespace GarbageCollector.Controllers
         }
 
         // GET: CustomerController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CustomerController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CustomerController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CustomerController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

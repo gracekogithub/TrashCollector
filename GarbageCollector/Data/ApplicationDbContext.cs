@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using GarbageCollector.Models;
 
 namespace GarbageCollector.Data
 {
@@ -28,5 +29,9 @@ namespace GarbageCollector.Data
                   }
                 );
         }
+
+        public DbSet<Customer> Customer { get; set; }
+
+        public DbSet<Employee> Employee { get; set; }
     }
 }
