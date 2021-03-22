@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
+
 namespace GarbageCollector.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -77,7 +78,17 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
             public string Role { get; set; }
            
         }
-
+       
+        public async Task<IActionResult> Register()
+        {
+            if (!_roleManager.RoleExistsAsync(Extra.Extra.Admin).GetAwaiter().GetResult())
+            {
+                await _roleManager.CreateAsync(new IdentityRole(Extra.Extra.Admin));
+                await _roleManager.CreateAsync(new IdentityRole(Extra.Extra.Customer));
+                await _roleManager.CreateAsync(new IdentityRole(Extra.Extra.Employee));
+            }
+                return LocalRedirect(ReturnUrl);
+        }
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
@@ -101,10 +112,7 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, Input.Role);
                     }
-                    //if (await _roleCustomer.RoleExistsAsync(Input.Role))
-                    //{
-                    //    await _userCustomer.AddToRoleAsync(user, Input.Role);
-                    //}
+                    
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
