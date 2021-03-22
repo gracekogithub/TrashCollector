@@ -31,11 +31,11 @@ namespace GarbageCollector.Controllers
         //}
 
         // GET: EmployeeController/Create
-        public ActionResult Create()
-        {
-            var manage1 = _employee.Employee;
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+            
+        //    return View();
+        //}
 
         // POST: EmployeeController/Create
         [HttpPost]

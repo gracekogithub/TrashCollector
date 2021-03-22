@@ -1,6 +1,7 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -68,4 +69,40 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+/*Hide browser's default radio button*/
+.radio-container input {
+    opacity: 0;
+    cursor: pointer;
+}
+/*create a custom radio button*/
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: solid transparent;
+    width: 100px;
+    background-color: #eee;
+    padding: 5px 15px 5px 15px;
+    background-color: transparent;
+    border-color: #162466;
+}
+/*On mouse-ober, add a grey backgound color*/
+.radio-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+/*when the radio button is checked*/
+.radio-container input:checked ~ .checkmark {
+    background-color: #162466;
+    color: white;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
 }
