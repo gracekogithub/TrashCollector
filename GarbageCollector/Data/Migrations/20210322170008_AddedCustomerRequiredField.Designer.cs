@@ -4,14 +4,16 @@ using GarbageCollector.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GarbageCollector.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210322170008_AddedCustomerRequiredField")]
+    partial class AddedCustomerRequiredField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace GarbageCollector.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BillPay")
+                    b.Property<int>("BillPayment")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -67,25 +69,15 @@ namespace GarbageCollector.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BillPay")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("EmployeeId")
+                        .HasColumnType("bit");
 
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("OneTimePickupDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("RegularPickupDay")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -123,8 +115,8 @@ namespace GarbageCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c7a9b530-b4dd-4805-b323-5edac02d68a3",
-                            ConcurrencyStamp = "c454a0e8-c049-4090-b442-b07835511551",
+                            Id = "c0d59813-1a60-418e-879a-19b22107cc87",
+                            ConcurrencyStamp = "08b4930b-8741-4e1f-8668-071583fe421b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
