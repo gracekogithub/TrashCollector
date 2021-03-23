@@ -18,7 +18,10 @@ namespace GarbageCollector.Models
         [Display(Name = "Fist Name")]
         [Required(ErrorMessage = "Fist Name is Required")]
         public string FirstName { get; set; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
@@ -42,8 +45,11 @@ namespace GarbageCollector.Models
         [Display(Name= "Regular Pickup Day")]
         [Required(ErrorMessage = "Pickup Day is Required")]
         public DateTime RegularPickupDay { get; set; }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
         [Display(Name= "One Time Pickup Day")]
         public DateTime OneTimePickupDay { get; set; }
 
@@ -53,6 +59,14 @@ namespace GarbageCollector.Models
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set;}
         public IdentityUser IdentityUser { get; set; }
+<<<<<<< HEAD
        
+=======
+        //[NotMapped]
+        //public SelectList Select { get; set; }
+        //[NotMapped]
+        //public SelectList Change { get; set; }
+      
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
     }
 }

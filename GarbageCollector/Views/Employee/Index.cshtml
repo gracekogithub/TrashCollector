@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -20,9 +19,12 @@
     <thead>
         <tr>
             <th>
+<<<<<<< HEAD
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
+=======
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
@@ -44,6 +46,7 @@
     <tbody>
         @foreach (var item in Model)
         {
+<<<<<<< HEAD
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -70,6 +73,31 @@
                 </div>
             </td>
         </tr>
+=======
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegularPickupDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OneTimePickupDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BillPay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdentityUserId)
+                </td>
+                <td>
+                    <div class="w-100 btn-group" role="group">
+                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-1">Edit</a>
+                        <a asp-controller="Employee" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-1">Delete</a>
+                    </div>
+                </td>
+            </tr>
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
         }
     </tbody>
 </table>

@@ -33,10 +33,13 @@ namespace GarbageCollector.Data.Migrations
                     b.Property<int>("BillPay")
                         .HasColumnType("int");
 
+<<<<<<< HEAD
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+=======
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -71,10 +74,13 @@ namespace GarbageCollector.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+<<<<<<< HEAD
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+=======
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
                     b.Property<int>("BillPay")
                         .HasColumnType("int");
 
@@ -82,6 +88,7 @@ namespace GarbageCollector.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<< HEAD
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -102,6 +109,21 @@ namespace GarbageCollector.Data.Migrations
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
+=======
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("OneTimePickupDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RegularPickupDay")
+                        .HasColumnType("datetime2");
+
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
                     b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
@@ -138,8 +160,13 @@ namespace GarbageCollector.Data.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             Id = "35d3aed9-adf5-4247-a9b4-536eaa779562",
                             ConcurrencyStamp = "6cf02538-65a2-413b-9b35-f66ecafcd335",
+=======
+                            Id = "c7a9b530-b4dd-4805-b323-5edac02d68a3",
+                            ConcurrencyStamp = "c454a0e8-c049-4090-b442-b07835511551",
+>>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
