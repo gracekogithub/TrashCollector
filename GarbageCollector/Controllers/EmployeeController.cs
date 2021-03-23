@@ -2,9 +2,11 @@
 using GarbageCollector.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GarbageCollector.Controllers
@@ -12,30 +14,28 @@ namespace GarbageCollector.Controllers
    
     public class EmployeeController : Controller
     {
-        private readonly ApplicationDbContext _employee;
-        public EmployeeController(ApplicationDbContext employee)
+        private readonly ApplicationDbContext _context;
+        public EmployeeController(ApplicationDbContext context)
         {
-            _employee = employee;
+            _context = context;
         }
-        // GET: EmployeeController
+
+
+        // GET: EmployeeController/Details/5
         public ActionResult Index()
         {
-            var manage = _employee.Employee;
-            return View(manage);
+            var employee = _context.Employee;
+            return View(employee);
+
+
         }
 
-        //// GET: EmployeeController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
+        //GET: EmployeeController/Create
+        public ActionResult Create()
+        {
 
-        // GET: EmployeeController/Create
-        //public ActionResult Create()
-        //{
-            
-        //    return View();
-        //}
+            return View();
+        }
 
         // POST: EmployeeController/Create
         [HttpPost]
@@ -44,8 +44,8 @@ namespace GarbageCollector.Controllers
         {
             try
             {
-                _employee.Employee.Add(create);
-                _employee.SaveChanges();
+                _context.Employee.Add(create);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -57,7 +57,7 @@ namespace GarbageCollector.Controllers
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
         {
-            var manage2 = _employee.Employee.Find(id);
+            var manage2 = _context.Employee.Find(id);
             return View(manage2);
         }
 
@@ -68,8 +68,8 @@ namespace GarbageCollector.Controllers
         {
             try
             {
-                _employee.Employee.Add(edit);
-                _employee.SaveChanges();
+                _context.Employee.Add(edit);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -79,9 +79,9 @@ namespace GarbageCollector.Controllers
         }
 
         // GET: EmployeeController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var manage3 = _employee.Employee.Find(id);
+            var manage3 = _context.Employee.Find(id);
             return View(manage3);
         }
 
@@ -92,8 +92,8 @@ namespace GarbageCollector.Controllers
         {
             try
             {
-                _employee.Employee.Add(delete);
-                _employee.SaveChanges();
+                _context.Employee.Add(delete);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

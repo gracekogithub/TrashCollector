@@ -11,7 +11,8 @@ namespace GarbageCollector.ActionFilters
     public class GlobalRouting :IActionFilter
     {
 
-        private readonly ClaimsPrincipal _claimsPrincipal; public GlobalRouting(ClaimsPrincipal claimsPrincipal)
+        private readonly ClaimsPrincipal _claimsPrincipal; 
+        public GlobalRouting(ClaimsPrincipal claimsPrincipal)
         {
             _claimsPrincipal = claimsPrincipal;
         }
@@ -33,6 +34,7 @@ namespace GarbageCollector.ActionFilters
         }
         public void OnActionExecuted(ActionExecutedContext context)
         {
+           
         }
     }
 }
