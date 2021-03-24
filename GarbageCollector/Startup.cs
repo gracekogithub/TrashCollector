@@ -38,13 +38,10 @@ namespace GarbageCollector
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
-<<<<<<< HEAD
-            //services.AddControllersWithViews();
-            //services.AddRazorPages();
-=======
+
             services.AddControllersWithViews();
             services.AddRazorPages();
->>>>>>> 83feb6469c4fa9f366c1afd62b56713adfc3e5bc
+
 
             services.AddScoped<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
             services.AddControllers(config => { config.Filters.Add(typeof(GlobalRouting)); });

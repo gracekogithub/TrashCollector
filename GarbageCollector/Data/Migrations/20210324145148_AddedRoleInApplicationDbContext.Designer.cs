@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarbageCollector.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210320063915_AddedForeignKeyIntoEmployee")]
-    partial class AddedForeignKeyIntoEmployee
+    [Migration("20210324145148_AddedRoleInApplicationDbContext")]
+    partial class AddedRoleInApplicationDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,11 +28,33 @@ namespace GarbageCollector.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BillPay")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OneTimePickupDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RegularPickupDay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -48,11 +70,32 @@ namespace GarbageCollector.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BillPay")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OneTimePickupDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("RegularPickupDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -90,8 +133,8 @@ namespace GarbageCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "94a42c00-366a-4844-9e8d-dd35f504ce46",
-                            ConcurrencyStamp = "9c583028-227f-4e8d-8760-91c5835f5b79",
+                            Id = "2b5ea0c1-3b8b-48db-8570-4cc5e1beb10b",
+                            ConcurrencyStamp = "7b5aeefe-7343-4d6f-8771-45b066df06ce",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
