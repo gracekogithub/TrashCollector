@@ -18,7 +18,8 @@ namespace GarbageCollector.ActionFilters
         }
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var controller = context.RouteData.Values["controller"]; if (controller.Equals("Home"))
+            var controller = context.RouteData.Values["controller"]; 
+            if (controller.Equals("Home"))
             {
                 if (_claimsPrincipal.IsInRole("Customer"))
                 {

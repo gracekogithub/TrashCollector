@@ -31,7 +31,6 @@ namespace GarbageCollector.Data
         public DbSet<Customer> Customer { get; set; }
 
         public DbSet<Employee> Employee { get; set; }
-        public DbSet<Employee> Role { get; set; }
-
+        public IEnumerable<object> Customers { get; internal set; }
     }
 }

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GarbageCollector.Data.Migrations
+namespace GarbageCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210324145148_AddedRoleInApplicationDbContext")]
-    partial class AddedRoleInApplicationDbContext
+    [Migration("20210324184946_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,9 @@ namespace GarbageCollector.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BillPay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -133,8 +136,8 @@ namespace GarbageCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2b5ea0c1-3b8b-48db-8570-4cc5e1beb10b",
-                            ConcurrencyStamp = "7b5aeefe-7343-4d6f-8771-45b066df06ce",
+                            Id = "680039cb-ff51-4667-a92c-7f60a6ae55c0",
+                            ConcurrencyStamp = "6524d143-f2f1-4b2b-87ae-de897deb3788",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
