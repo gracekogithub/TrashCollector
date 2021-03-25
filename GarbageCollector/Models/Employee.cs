@@ -35,7 +35,7 @@ namespace GarbageCollector.Models
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
-
+        public int EmployeeId { get; internal set; }
     }
 
 }
