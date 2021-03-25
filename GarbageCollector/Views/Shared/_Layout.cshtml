@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GarbageCollector</title>
@@ -31,7 +32,7 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         @*@if (User.IsInRole(Extra.Admin) || User.IsInRole(Extra.Employee))
-                        {}*@
+                            {}*@
                         <li class="nav-item dropdown text-drk-50">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,9 +42,9 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Index">Employee</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customer</a>
                             </div>
-                            
+
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -57,11 +58,17 @@
             @RenderBody()
         </main>
     </div>
+    <a class="nav-link text-dark" asp-area="" asp-controller="GoogleMap" asp-action="Index">GoogleMap</a>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSIJHs0vYekUAsWVVivPkJchsE4eqQEhs&callback=myMap"></script>
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - GarbageCollector - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+
+
+
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
