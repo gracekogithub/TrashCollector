@@ -39,6 +39,13 @@ namespace GarbageCollector.Models
 
         [Display(Name= "One Time Pickup Day")]
         public DateTime OneTimePickupDay { get; set; }
+        [Display(Name = "Suspending Start Day")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString= "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? StartDate { get; set; }
+        [Display(Name = "Suspending End Day")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [DateGreaterThanAttribute(otherPropertyName = "StartDate", ErrorMessage = "End date must be greater than start date")]
+        public DateTime? EndDate { get; set; }
 
         [Display(Name= "Bill Pay")]
         public int BillPay { get; set; }
@@ -52,5 +59,11 @@ namespace GarbageCollector.Models
         {
             throw new NotImplementedException();
         }
+    }
+
+    internal class DateGreaterThanAttribute : Attribute
+    {
+        public string otherPropertyName { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }
