@@ -14,11 +14,16 @@ namespace GarbageCollector.Controllers
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
-        
+        [BindProperty]
+        public Customer Payment { get; set; }
 
         public CustomersController(ApplicationDbContext context)
         {
             _context = context;
+            //Payment = new List<Customer>()
+            //{
+            //    Payment
+            //};
         }
 
         // GET: Customers
@@ -102,18 +107,20 @@ namespace GarbageCollector.Controllers
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var editting = await _context.Customer.FindAsync(id);
+            return View(editting);
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
+            //var customer = await _context.Customer.FindAsync(id);
+            //if (customer == null)
+            //{
+            //    return NotFound();
+            //}
+            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            //return View(customer);
         }
 
         // POST: Customers/Edit/5
@@ -121,35 +128,46 @@ namespace GarbageCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Address,ZipCode,RegularPickupDay,OneTimePickupDay,BillPay,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Edit(int? id, Customer customer)
         {
-            if (id != customer.Id)
-            {
-                return NotFound();
-            }
+            //if (id != customer.Id)
+            //{
+            //    return NotFound();
+            //}
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
+                    _context.Customer.Update(customer);
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch
                 {
-                    if (!CustomerExists(customer.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return View();
                 }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
+                //try
+                //{
+                //    _context.Update(customer);
+                //    _context.SaveChanges();
+                //    return RedirectToAction(nameof(Index));
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!CustomerExists(customer.Id))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
+                //return RedirectToAction(nameof(Index));
+            //}
+            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            //return View(customer);
         }
 
         // GET: Customers/Delete/5

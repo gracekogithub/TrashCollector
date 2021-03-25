@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GarbageCollector.Data;
 using GarbageCollector.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GarbageCollector.Controllers
 {
+    
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;

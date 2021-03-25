@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using GarbageCollector.Extra
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,7 +18,7 @@
     <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
 
 </head>
-<body>
+<body class="search-background">
     <header>
         <nav class="navbar navbar-inverse navbar-expand-sm navbar-toggleable-sm navbar box-shadow mb-3">
             <div class="container">
@@ -27,28 +30,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                        @*@if (User.IsInRole(Extra.Admin) || User.IsInRole(Extra.Employee))
+                        {}*@
                         <li class="nav-item dropdown text-drk-50">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Content
                             </a>
-                            @*<div class="dropdown-menu" aria-labelledby="navbarDropDownMenueLink">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropDownMenueLink">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Index">Employee</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customer</a>
-                                <a class="dropdown-item">Bill Pay</a>
-                                <a class="dropdown-item">User</a>
-
-                            </div>*@
+                            </div>
+                            
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Index">Employee</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customer</a>
-                        </li>
-
                     </ul>
                 </div>
             </div>

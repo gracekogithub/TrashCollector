@@ -47,5 +47,10 @@ namespace GarbageCollector.Models
         public string IdentityUserId { get; set;}
         public IdentityUser IdentityUser { get; set; }
         public int CustomerId { get; internal set; }
+
+        public static implicit operator Customer(List<Customer> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
