@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GarbageCollector.Data;
 using GarbageCollector.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace GarbageCollector.Controllers
 {
-    
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -59,7 +57,7 @@ namespace GarbageCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Address,ZipCode,RegularPickupDay,OneTimePickupDay,BillPay,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PickUpAreaZipCode,ConfirmPickUpDate,Charge,IdentityUserId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +91,7 @@ namespace GarbageCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Address,ZipCode,RegularPickupDay,OneTimePickupDay,BillPay,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PickUpAreaZipCode,ConfirmPickUpDate,Charge,IdentityUserId")] Employee employee)
         {
             if (id != employee.Id)
             {

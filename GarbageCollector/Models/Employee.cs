@@ -21,25 +21,16 @@ namespace GarbageCollector.Models
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
-       
 
-        [Display(Name = "Address")]
-        [Required(ErrorMessage = "Address is Required")]
-        public string Address { get; set; }
-
-        [Display(Name = "Zip Code")]
-        [Required(ErrorMessage = "Zip Code is Required")]
-        public int ZipCode { get; set; }
-
-        [Display(Name = "Customer Pickup Day")]
+        [Display(Name = "Assigned Pickup Area Zip Code")]
         
-        public DateTime RegularPickupDay { get; set; }
+        public int PickUpAreaZipCode { get; set; }
 
         [Display(Name = "One Time Pickup Day")]
-        public DateTime OneTimePickupDay { get; set; }
+        public DateTime ConfirmPickUpDate { get; set; }
 
         [Display(Name = "Bill Pay")]
-        public int BillPay { get; set; }
+        public int Charge { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
