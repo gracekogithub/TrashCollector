@@ -24,14 +24,15 @@ namespace GarbageCollector.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employee = _context.Employee.Where(cu => cu.IdentityUserId == userId).ToList();
+            var employee = _context.Employee.Where(cu => cu.IdentityUserId == userId).SingleOrDefault();
+            var customerZipCode = _context.Customer.Where(c=>c.ZipCode == employee.PickUpAreaZipCode).ToList();
             if (employee == null)
             {
                 return RedirectToAction(nameof(Create));
             }
             else
             {
-                return View(employee);
+                return View(customerZipCode);
             }
         }
 

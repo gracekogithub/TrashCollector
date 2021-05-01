@@ -20,10 +20,7 @@ namespace GarbageCollector.Controllers
         public CustomersController(ApplicationDbContext context)
         {
             _context = context;
-            //Payment = new List<Customer>()
-            //{
-            //    Payment
-            //};
+           
         }
 
         // GET: Customers
@@ -74,17 +71,7 @@ namespace GarbageCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Address,ZipCode,RegularPickupDay,OneTimePickupDay,BillPay,IdentityUserId")] Customer customer)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(customer);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-        //    return View(customer);
-        //}
+        
         public async Task<IActionResult> Create(Customer customer)
         {
             try
@@ -109,18 +96,7 @@ namespace GarbageCollector.Controllers
         {
             var editting = await _context.Customer.FindAsync(id);
             return View(editting);
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var customer = await _context.Customer.FindAsync(id);
-            //if (customer == null)
-            //{
-            //    return NotFound();
-            //}
-            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            //return View(customer);
+           
         }
 
         // POST: Customers/Edit/5
@@ -130,13 +106,7 @@ namespace GarbageCollector.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, Customer customer)
         {
-            //if (id != customer.Id)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (ModelState.IsValid)
-            //{
+           
                 try
                 {
                     _context.Customer.Update(customer);
@@ -147,58 +117,11 @@ namespace GarbageCollector.Controllers
                 {
                     return View();
                 }
-                //try
-                //{
-                //    _context.Update(customer);
-                //    _context.SaveChanges();
-                //    return RedirectToAction(nameof(Index));
-                //}
-                //catch (DbUpdateConcurrencyException)
-                //{
-                //    if (!CustomerExists(customer.Id))
-                //    {
-                //        return NotFound();
-                //    }
-                //    else
-                //    {
-                //        throw;
-                //    }
-                //}
-                //return RedirectToAction(nameof(Index));
-            //}
-            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            //return View(customer);
+              
         }
 
-        // GET: Customers/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+       
 
-        //    var customer = await _context.Customer
-        //        .Include(c => c.IdentityUser)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(customer);
-        //}
-
-        //// POST: Customers/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var customer = await _context.Customer.FindAsync(id);
-        //    _context.Customer.Remove(customer);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
         public IActionResult BillingCustomer(int id)
         {
             var billing = _context.Customer.Find(id);
