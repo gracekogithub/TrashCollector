@@ -77,18 +77,7 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
             [Display(Name = "Role Name")]
             public string Role { get; set; }
            
-        }
-       
-        public async Task<IActionResult> Register()
-        {
-            if (!_roleManager.RoleExistsAsync(Extra.Extra.Admin).GetAwaiter().GetResult())
-            {
-                await _roleManager.CreateAsync(new IdentityRole(Extra.Extra.Admin));
-                await _roleManager.CreateAsync(new IdentityRole(Extra.Extra.Customer));
-                await _roleManager.CreateAsync(new IdentityRole(Extra.Extra.Employee));
-            }
-                return LocalRedirect(ReturnUrl);
-        }
+        }    
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;

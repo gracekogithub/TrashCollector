@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace GarbageCollector.Controllers
 {
+    //HttpClient
+    //Google Maps API (both JavaScript + Geolocating)
+    //JsonDeserialization
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
