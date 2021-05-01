@@ -13,7 +13,7 @@ namespace GarbageCollector.Models
     public class Customer
     {
         [Key]
-        public int Id { get; set; }
+        public int CustomerId { get; set; }
 
         [Display(Name = "Fist Name")]
         [Required(ErrorMessage = "Fist Name is Required")]

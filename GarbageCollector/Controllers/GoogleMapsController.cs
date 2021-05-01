@@ -10,6 +10,9 @@ using static GarbageCollector.Models.GoogleMap;
 
 namespace GarbageCollector.Controllers
 {
+    //HttpClient
+    //Google Maps API (both JavaScript + Geolocating)
+    //JsonDeserialization
     public class GoogleMapsController : Controller
     {
         public ActionResult Index()

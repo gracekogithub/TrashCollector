@@ -19,18 +19,22 @@ namespace GarbageCollector.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<IdentityRole>()
-                .HasData(
-                  new IdentityRole
-                  {
-                      Name = "Admin",
-                      NormalizedName = "ADMIN"
-                  }
-                );
+            .HasData(
+            new IdentityRole
+            {
+                Name = "Customer",
+                NormalizedName = "CUSTOMER"
+            },
+              new IdentityRole
+              {
+                  Name = "Employee",
+                  NormalizedName = "EMPLOYEE"
+              }
+            );
         }
 
-        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
-        public DbSet<Employee> Employee { get; set; }
-        public IEnumerable<object> Customers { get; internal set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

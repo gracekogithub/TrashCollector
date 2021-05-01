@@ -24,15 +24,15 @@ namespace GarbageCollector.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employee = _context.Employee.Where(cu => cu.IdentityUserId == userId).SingleOrDefault();
-            var customerZipCode = _context.Customer.Where(c=>c.ZipCode == employee.PickUpAreaZipCode).ToList();
+            var employee = _context.Employees.Where(cu => cu.IdentityUserId == userId).SingleOrDefault();
+            var allCustomersInZipCode = _context.Customers.Where(c=>c.ZipCode == employee.PickUpAreaZipCode).ToList();
             if (employee == null)
             {
                 return RedirectToAction(nameof(Create));
             }
             else
             {
-                return View(customerZipCode);
+                return View(allCustomersInZipCode);
             }
         }
 
@@ -44,9 +44,9 @@ namespace GarbageCollector.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employee
+            var employee = await _context.Employees
                 .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -74,7 +74,7 @@ namespace GarbageCollector.Controllers
                 employee.EmployeeId = 0;
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 employee.IdentityUserId = userId;
-                _context.Employee.Add(employee);
+                _context.Employees.Add(employee);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
 
@@ -96,7 +96,7 @@ namespace GarbageCollector.Controllers
         // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            var editting = await _context.Employee.FindAsync(id);
+            var editting = await _context.Employees.FindAsync(id);
             return View(editting);
         }
 
@@ -109,7 +109,7 @@ namespace GarbageCollector.Controllers
         {
             try
             {
-                _context.Employee.Update(employee);
+                _context.Employees.Update(employee);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -127,9 +127,9 @@ namespace GarbageCollector.Controllers
             //    return NotFound();
             //}
 
-            var employee = await _context.Employee
+            var employee = await _context.Employees
                 .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
             //if (employee == null)
             //{
             //    return NotFound();
@@ -143,15 +143,15 @@ namespace GarbageCollector.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employee.FindAsync(id);
-            _context.Employee.Remove(employee);
+            var employee = await _context.Employees.FindAsync(id);
+            _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employee.Any(e => e.Id == id);
+            return _context.Employees.Any(e => e.EmployeeId == id);
         }
     }
 }
