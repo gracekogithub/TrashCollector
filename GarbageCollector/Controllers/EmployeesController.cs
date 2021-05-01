@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using GarbageCollector.Data;
 using GarbageCollector.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GarbageCollector.Controllers
 {
+    [Authorize(Roles = "Employee")]
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -58,54 +60,39 @@ namespace GarbageCollector.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
         // POST: Employees/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Employee employee)
+        public IActionResult Create(Employee employee)
         {
             try
             {
-                employee.EmployeeId = 0;
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 employee.IdentityUserId = userId;
                 _context.Employees.Add(employee);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
-
             }
             catch
             {
                 return View();
             }
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(employee);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            //return View(employee);
         }
 
         // GET: Employees/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-            var editting = await _context.Employees.FindAsync(id);
-            return View(editting);
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
         }
 
         // POST: Employees/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Employee employee)
+        public IActionResult Edit(int id, Employee employee)
         {
             try
             {
@@ -120,38 +107,27 @@ namespace GarbageCollector.Controllers
         }
 
         // GET: Employees/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-
-            var employee = await _context.Employees
-                .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.EmployeeId == id);
-            //if (employee == null)
-            //{
-            //    return NotFound();
-            //}
-
-            return View(employee);
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
         }
 
         // POST: Employees/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult Delete(int id, Customer customer)
         {
-            var employee = await _context.Employees.FindAsync(id);
-            _context.Employees.Remove(employee);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool EmployeeExists(int id)
-        {
-            return _context.Employees.Any(e => e.EmployeeId == id);
+            try
+            {
+                _context.Customers.Remove(customer);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
