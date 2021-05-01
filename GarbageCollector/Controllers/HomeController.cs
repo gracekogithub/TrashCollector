@@ -1,10 +1,13 @@
 ﻿using GarbageCollector.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace GarbageCollector.Controllers
@@ -33,5 +36,20 @@ namespace GarbageCollector.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult GeocodingURL()
+        {
+            WebRequest request = WebRequest.Create("https://maps.googleapis.com/maps/api/geocode/json?address={customer.Address.StreetAddress}+{customer.Address.City}+{customer.Address.State}" + GoogleMapApiKeys.apiKey);
+            //request.Headers.Add("Authorization Basic: ") + secretKey);
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
+            string responseFromServer = reader.ReadToEnd();
+            JObject parsedString = JObject.Parse(responseFromServer);
+            GoogleMap search = parsedString.ToObject<GoogleMap>();
+            return View(search);
+        }
+
     }
 }
+            
