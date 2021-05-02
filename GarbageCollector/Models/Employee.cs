@@ -28,6 +28,7 @@ namespace GarbageCollector.Models
      
 
         [ForeignKey("IdentityUser")]
+        [Display(Name = "Employee")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
     }

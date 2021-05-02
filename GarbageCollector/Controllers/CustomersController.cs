@@ -9,6 +9,7 @@ using GarbageCollector.Data;
 using GarbageCollector.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using GarbageCollector.Services;
 
 namespace GarbageCollector.Controllers
 {
@@ -16,18 +17,21 @@ namespace GarbageCollector.Controllers
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly GoogleMapService _map;
 
-        public CustomersController(ApplicationDbContext context)
+        public CustomersController(ApplicationDbContext context, GoogleMapService map)
         {
             _context = context;
+            _map = map;
         }
 
         // GET: Customers
         public IActionResult Index()
         {
+            ViewData["apiKeys"] = GoogleApiKeys.apiKey;
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(cu => cu.IdentityUserId == userId).ToList();
-            if (customer == null)
+            if (customer.Count == 0)
             {
                 return RedirectToAction(nameof(Create));
             }
@@ -40,6 +44,7 @@ namespace GarbageCollector.Controllers
         // GET: Customers/Details/5
         public IActionResult Details(int id)
         {
+            ViewData["apiKeys"] = GoogleApiKeys.apiKey;
             var customer = _context.Customers.Where(ct => ct.CustomerId == id).FirstOrDefault();
             return View(customer);
         }
@@ -55,20 +60,23 @@ namespace GarbageCollector.Controllers
         // POST: Customers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
-        public IActionResult Create(Customer customer)
+
+        public async Task<ActionResult> Create(Customer customer)
         {
             try
             {
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
+
+                var customerwithLatLng = await _map.GetGeoCoding(customer);
+
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
-                
             }
             catch
             {
+                Console.WriteLine("Error");
                 return View();
             }
         }
@@ -76,6 +84,7 @@ namespace GarbageCollector.Controllers
         // GET: Customers/Edit/5
         public IActionResult Edit(int? id)
         {
+            ViewData["apiKeys"] = GoogleApiKeys.apiKey;
             var editting = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(editting);
         }
@@ -83,20 +92,23 @@ namespace GarbageCollector.Controllers
         // POST: Customers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, Customer customer)
+        public async Task<ActionResult> Edit(int id, Customer customer)
         {
-                try
-                {
+            try
+            {
+                var customerwithLatLng = await _map.GetGeoCoding(customer);
+
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
                 _context.Customers.Update(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-                catch
-                {
-                    return View();
-                }
+            catch
+            {
+                Console.WriteLine("Error");
+                return View();
+            }
         }
 
         public IActionResult BillingCustomer(int id)
@@ -121,5 +133,32 @@ namespace GarbageCollector.Controllers
                 return View();
             }
         }
+        public ActionResult Delete(int id)
+        {
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
+        }
+
+        // POST: CustomerController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Customer customer)
+        {
+            try
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+                _context.Customers.Remove(customer);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                Console.WriteLine("Error");
+                return View();
+            }
+        }
     }
+
+   
 }

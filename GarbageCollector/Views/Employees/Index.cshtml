@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<GarbageCollector.Models.Customer>
 
-@{ ViewData["Title"] = "Index"; }
+@{ 
+    ViewData["Title"] = "Index"; 
+}
 
 <h1>List Of Customers</h1>
 
-@Html.DropDownList("List", null, new
+@*@Html.DropDownList("List", null, new
 {
     onchange = "document.location.href = '/Customer/Index?value=' + this.value;"
-})
+})*@
 
 <table class="table">
     <thead>

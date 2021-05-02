@@ -26,8 +26,6 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
-        //private readonly RoleManager<IdentityRole> _roleCustomer;
-        //private readonly UserManager<IdentityUser> _userCustomer;
 
 
         public RegisterModel(
@@ -36,16 +34,14 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager)
-            //RoleManager<IdentityRole> roleCustomer,
-            //UserManager<IdentityUser> userCustomer)
+    
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
-            //_roleCustomer = roleCustomer;
-            //_userCustomer = userCustomer;
+     
         }
 
         [BindProperty]
@@ -77,14 +73,14 @@ namespace GarbageCollector.Areas.Identity.Pages.Account
             [Display(Name = "Role Name")]
             public string Role { get; set; }
            
-        }    
+        }
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            ExternalLogins = (await 
-                _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             var roles = _roleManager.Roles;
-            Roles = new SelectList(roles, "Name", "Name");
+            Roles = new SelectList(roles, "Name", "Name"); //Added
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

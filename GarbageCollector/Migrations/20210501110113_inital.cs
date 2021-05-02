@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GarbageCollector.Migrations
 {
-    public partial class Initial : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -153,26 +153,29 @@ namespace GarbageCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    CustomerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: false),
                     ZipCode = table.Column<int>(nullable: false),
                     RegularPickupDay = table.Column<string>(nullable: false),
+                    IsPickupConfirmed = table.Column<string>(nullable: true),
                     OneTimePickupDay = table.Column<DateTime>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: true),
+                    EndDate = table.Column<DateTime>(nullable: true),
                     BillPay = table.Column<int>(nullable: false),
-                    IdentityUserId = table.Column<string>(nullable: true),
-                    CustomerId = table.Column<int>(nullable: false)
+                    LastPickupDay = table.Column<DateTime>(nullable: true),
+                    IdentityUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
                     table.ForeignKey(
-                        name: "FK_Customer_AspNetUsers_IdentityUserId",
+                        name: "FK_Customers_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -180,25 +183,21 @@ namespace GarbageCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employee",
+                name: "Employees",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    EmployeeId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
-                    Address = table.Column<string>(nullable: false),
-                    ZipCode = table.Column<int>(nullable: false),
-                    RegularPickupDay = table.Column<DateTime>(nullable: false),
-                    OneTimePickupDay = table.Column<DateTime>(nullable: false),
-                    BillPay = table.Column<int>(nullable: false),
+                    PickUpAreaZipCode = table.Column<int>(nullable: false),
                     IdentityUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employee", x => x.Id);
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Employee_AspNetUsers_IdentityUserId",
+                        name: "FK_Employees_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -208,7 +207,12 @@ namespace GarbageCollector.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "680039cb-ff51-4667-a92c-7f60a6ae55c0", "6524d143-f2f1-4b2b-87ae-de897deb3788", "Admin", "ADMIN" });
+                values: new object[] { "e2e2d8f9-ef9b-4501-be6f-8580de0cb708", "31454f77-f813-439f-ba77-86356cf6cda4", "Customer", "CUSTOMER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "64e1d118-e94e-43f0-9680-b2efe7df5a63", "f5275062-2b0e-4c01-aade-5dee2d65be31", "Employee", "EMPLOYEE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -250,13 +254,13 @@ namespace GarbageCollector.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_IdentityUserId",
-                table: "Customer",
+                name: "IX_Customers_IdentityUserId",
+                table: "Customers",
                 column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employee_IdentityUserId",
-                table: "Employee",
+                name: "IX_Employees_IdentityUserId",
+                table: "Employees",
                 column: "IdentityUserId");
         }
 
@@ -278,10 +282,10 @@ namespace GarbageCollector.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

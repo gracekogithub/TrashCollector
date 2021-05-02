@@ -23,47 +23,31 @@ namespace GarbageCollector.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public IActionResult Index(int? value, Customer customer)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _context.Employees.Where(cu => cu.IdentityUserId == userId).SingleOrDefault();
-            var allCustomersInZipCode = _context.Customers.Where(c=>c.ZipCode == employee.PickUpAreaZipCode).ToList();
+         
             if (employee == null)
             {
                 return RedirectToAction(nameof(Create));
             }
-            else
-            {
-                return View(allCustomersInZipCode);
-            }
+            string currentDayOfWeek = DateTime.Now.DayOfWeek.ToString();
+            var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.PickUpAreaZipCode).ToList();
+            var customersWithSameDay = customersWithSameZip.Where(c => c.RegularPickupDay == currentDayOfWeek).ToList();
+            var customersWithSuspendedDays = customersWithSameDay.Where(c => c.StartDate.ToString() == currentDayOfWeek && c.EndDate.ToString() == currentDayOfWeek).ToList();
+            var NewSet = customersWithSameDay.Except(customersWithSuspendedDays);
+            return View(NewSet);
         }
 
         // GET: Employees/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employee = await _context.Employees
-                .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.EmployeeId == id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return View(employee);
-        }
+       
 
         // GET: Employees/Create
         public IActionResult Create()
         {
             return View();
         }
-
-        // POST: Employees/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Employee employee)
@@ -81,6 +65,8 @@ namespace GarbageCollector.Controllers
                 return View();
             }
         }
+        // POST: Employees/Create
+       
 
         // GET: Employees/Edit/5
         public IActionResult Edit(int? id)
@@ -92,11 +78,11 @@ namespace GarbageCollector.Controllers
         // POST: Employees/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Employee employee)
+        public IActionResult Edit(int id, Customer customer)
         {
             try
             {
-                _context.Employees.Update(employee);
+                _context.Customers.Update(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -126,6 +112,24 @@ namespace GarbageCollector.Controllers
             }
             catch
             {
+                return View();
+            }
+        }
+        public IActionResult Charge(int id)
+        {
+            try
+            {
+                var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+                customer.BillPay += 25;
+                customer.LastPickupDay = DateTime.Now;
+                customer.IsPickupConfirmed = "Yes";
+                _context.Customers.Update(customer);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error");
                 return View();
             }
         }

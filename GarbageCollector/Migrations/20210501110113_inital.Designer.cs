@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarbageCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210324184946_Initial")]
-    partial class Initial
+    [Migration("20210501110113_inital")]
+    partial class inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace GarbageCollector.Migrations
 
             modelBuilder.Entity("GarbageCollector.Models.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -35,8 +35,8 @@ namespace GarbageCollector.Migrations
                     b.Property<int>("BillPay")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -45,9 +45,15 @@ namespace GarbageCollector.Migrations
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("IsPickupConfirmed")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastPickupDay")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OneTimePickupDay")
                         .HasColumnType("datetime2");
@@ -56,29 +62,25 @@ namespace GarbageCollector.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CustomerId");
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("GarbageCollector.Models.Employee", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BillPay")
-                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -91,20 +93,14 @@ namespace GarbageCollector.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OneTimePickupDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("RegularPickupDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ZipCode")
+                    b.Property<int>("PickUpAreaZipCode")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("EmployeeId");
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -136,10 +132,17 @@ namespace GarbageCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "680039cb-ff51-4667-a92c-7f60a6ae55c0",
-                            ConcurrencyStamp = "6524d143-f2f1-4b2b-87ae-de897deb3788",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Id = "e2e2d8f9-ef9b-4501-be6f-8580de0cb708",
+                            ConcurrencyStamp = "31454f77-f813-439f-ba77-86356cf6cda4",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = "64e1d118-e94e-43f0-9680-b2efe7df5a63",
+                            ConcurrencyStamp = "f5275062-2b0e-4c01-aade-5dee2d65be31",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
                         });
                 });
 

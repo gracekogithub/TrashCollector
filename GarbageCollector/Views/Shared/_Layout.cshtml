@@ -9,78 +9,53 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
-    <link rel="stylesheet" hreff="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" hreff="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
-    <link rel="stylesheet" hreff="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css" />
-    <link rel="stylesheet" hreff="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.print.css" media="print" />
-    <link rel="stylesheet" hreff="https://kendo.cdn.telerik.com/2020.2.513/styles/kendo.default-v2.min.css" />
-    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
-
+    
 </head>
 <body class="search-background">
     <header>
-        <nav class="navbar navbar-light navbar-expand-sm navbar-toggleable-sm navbar box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GarbageCollector</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TrashCollector</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        @*@if (User.IsInRole(Extra.Admin) || User.IsInRole(Extra.Employee))
-                            {}*@
-                        <li class="nav-item dropdown text-drk-50">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink"
-                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Content
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropDownMenueLink">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Index">Employee</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customer</a>
-                            </div>
-
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
             </div>
         </nav>
     </header>
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg6wVa2gy_@GoogleMapApiKeys.apiKey=myMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg6wVa2gy_@GoogleApiKeys.apiKey=myMap"></script>
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - GarbageCollector - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-
-
-
-
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    <script type="text/javascript" scr="/lib/~select2/js/select2.full.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js"></script>
-    <script type="https://endo.cdn.telerik.com/2020.2.513/js/kendo.all.min.js"></script>
-    <script type="text/javascript" src="~/js/notify.min.js"></script>
-    <script src="~/js/script-custom-calendar.js"></script>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>

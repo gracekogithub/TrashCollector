@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Details</h1>
@@ -11,53 +10,71 @@
     <h4>Customer</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Address)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Address)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ZipCode)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ZipCode)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RegularPickupDay)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RegularPickupDay)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsPickupConfirmed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsPickupConfirmed)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OneTimePickupDay)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.OneTimePickupDay)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BillPay)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BillPay)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdentityUser)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdentityUser.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastPickupDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastPickupDay)
         </dd>
     </dl>
 </div>

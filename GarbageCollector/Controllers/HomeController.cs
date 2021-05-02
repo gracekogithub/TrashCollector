@@ -28,7 +28,18 @@ namespace GarbageCollector.Controllers
         {
             return View();
         }
-
+        public IActionResult GeocodingURL()
+        {
+            WebRequest request = WebRequest.Create("https://maps.googleapis.com/maps/api/geocode/json?address={customer.Address.StreetAddress}+{customer.Address.City}+{customer.Address.State}" + GoogleApiKeys.apiKey);
+            //request.Headers.Add("Authorization Basic: ") + secretKey);
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
+            string responseFromServer = reader.ReadToEnd();
+            JObject parsedString = JObject.Parse(responseFromServer);
+            GoogleMap search = parsedString.ToObject<GoogleMap>();
+            return View(search);
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -40,18 +51,7 @@ namespace GarbageCollector.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult GeocodingURL()
-        {
-            WebRequest request = WebRequest.Create("https://maps.googleapis.com/maps/api/geocode/json?address={customer.Address.StreetAddress}+{customer.Address.City}+{customer.Address.State}" + GoogleMapApiKeys.apiKey);
-            //request.Headers.Add("Authorization Basic: ") + secretKey);
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(stream);
-            string responseFromServer = reader.ReadToEnd();
-            JObject parsedString = JObject.Parse(responseFromServer);
-            GoogleMap search = parsedString.ToObject<GoogleMap>();
-            return View(search);
-        }
+      
 
     }
 }

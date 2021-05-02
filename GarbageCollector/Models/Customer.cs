@@ -53,7 +53,16 @@ namespace GarbageCollector.Models
         [Display(Name = "Last Pickup Day")]
         public DateTime? LastPickupDay { get; set; }
 
+        [Display(Name = "Longitude")]
+        public double Longitude
+        { get; set; }
+        [Display(Name = "Latitude")]
+        public double Latitude
+        { get; set; }
+
+
         [ForeignKey("IdentityUser")]
+        [Display(Name = "Customer")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
     }
