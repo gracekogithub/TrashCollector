@@ -37,7 +37,7 @@ namespace GarbageCollector.Controllers
             StreamReader reader = new StreamReader(stream);
             string responseFromServer = reader.ReadToEnd();
             JObject parsedString = JObject.Parse(responseFromServer);
-            GoogleMap search = parsedString.ToObject<GoogleMap>();
+            Customer search = parsedString.ToObject<Customer>();
             return View(search);
         }
         public IActionResult Privacy()

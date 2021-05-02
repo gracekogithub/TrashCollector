@@ -23,10 +23,13 @@ namespace GarbageCollector.Models
         public string LastName { get; set; }
 
 
-        [Display(Name = "Address")]
+        [Display(Name = "Street Name")]
         [Required(ErrorMessage = "Address is Required")]
-        public string Address { get; set; }
+        public string StreetName { get; set; }
 
+        [Display(Name = "City")]
+        [Required(ErrorMessage = "City is Required")]
+        public string City { get; set; }
 
         [Display(Name = "Zip Code")]
         [Required(ErrorMessage = "Zip Code is Required")]

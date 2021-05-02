@@ -13,7 +13,7 @@ namespace GarbageCollector.Services
     {
     private string GetGeoCodingURL(Customer customer)
     {
-        return $"https://maps.googleapis.com/maps/api/geocode/json?address={customer.StreetName}+{customer.City}+{customer.State}+&key="
+        return $"https://maps.googleapis.com/maps/api/geocode/json?address={customer.StreetName}+{customer.City}+{customer.ZipCode}+&key="
             + GoogleApiKeys.apiKey;
     }
     public async Task<Customer> GetGeoCoding(Customer customer)
